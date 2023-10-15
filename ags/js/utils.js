@@ -74,6 +74,10 @@ export async function globalServices() {
     globalThis.mpris = globalThis.ags.Mpris;
 }
 
+export function disableBluetooth() {
+    return Utils.execAsync('bluetoothctl power off');
+}
+
 export function disableNotificationsDaemons() {
     return Utils.execAsync('pkill mako');
 }

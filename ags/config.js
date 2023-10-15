@@ -19,6 +19,7 @@ setup.warnOnLowBattery();
 setup.scssWatcher();
 setup.globalServices();
 setup.disableNotificationsDaemons();
+setup.disableBluetooth();
 
 export default {
     maxStreamVolume: 1.05,

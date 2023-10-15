@@ -5,17 +5,11 @@ import { App, Hyprland, Applications, Utils, Widget } from '../imports.js';
 
 const pinned = [
     'firefox',
-    'org.wezfurlong.wezterm',
-    'org.gnome.Nautilus',
-    'org.gnome.Calendar',
-    'obsidian',
-    'transmission-gtk',
-    'caprine',
-    'teams-for-linux',
-    'discord',
+    'foot',
+    'manager',
+    'thunderbird',
     'spotify',
-    'com.usebottles.bottles',
-    'org.gnome.Software',
+    'telegram',
 ];
 
 const AppButton = ({ icon, ...rest }) => Widget.Button({
@@ -33,6 +27,23 @@ const AppButton = ({ icon, ...rest }) => Widget.Button({
     }),
 });
 
+function substitute(str) {
+    const subs = [
+        { from: 'Caprine', to: 'facebook-messenger' },
+        { from: 'processing-app-Base', to: 'arduino' },
+        { from: 'Gimp-2.10', to: 'gimp' },
+        { from: 'Vivado', to: 'vivado_logo' },
+        { from: 'MATLAB R2022a - academic use', to: 'matlab' },
+    ];
+
+    for (const { from, to } of subs) {
+        if (from === str)
+            return to;
+    }
+
+    return str;
+}
+
 const Taskbar = () => Widget.Box({
     binds: [['children', Hyprland, 'clients', c => c.map(client => {
         for (const appName of pinned) {
@@ -41,11 +52,13 @@ const Taskbar = () => Widget.Box({
         }
         for (const app of Applications.list) {
             if (client.title && app.match(client.title) ||
-                client.class && app.match(client.class)) {
+                substitute(client.class) && app.match(substitute(client.class))) {
                 return AppButton({
-                    icon: app.iconName,
-                    tooltipText: app.name,
-                    onMiddleClick: () => app.launch(),
+                    icon: substitute(client.class),
+                    tooltipText: client.title,
+                    onSecondaryClick: () => app.launch(),
+                    onClicked: () => Utils.execAsync(`hyprctl dispatch focuswindow address:${client.address}`).catch(print),
+                    onMiddleClick: () => Utils.execAsync(`hyprctl dispatch closewindow address:${client.address}`).catch(print),
                 });
             }
         }
