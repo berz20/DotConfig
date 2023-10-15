@@ -17,12 +17,12 @@ export default () =>
             {
                label: 'IT       ',
                variant: 'nodeadkeys',
-               name: 'IT Layout',
+               name: 'IT',
             },
             {
                label: 'US       ',
                variant: 'us',
-               name: 'US Layout',
+               name: 'US (IT intl)',
             },
          ];
 
@@ -34,13 +34,13 @@ export default () =>
                   onActivate: () => {
                      SelectedVariant = item.variant;
                      updateMenuStyle();
-                     execAsync(`hyprctl keyword input:kb_variant ${item.variant}`);
-                     btn._id = Notifications.instance.Notify(
+                     Utils.execAsync(`hyprctl keyword input:kb_variant ${item.variant}`);
+                     btn._id = Notifications.Notify(
                         'keyboard Layout',
                         btn._id || null,
                         'input-keyboard-symbolic',
                         item.name,
-                        '',
+                        'Keyboard Layout',
                         [],
                         {},
                      );

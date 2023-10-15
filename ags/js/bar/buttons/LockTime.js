@@ -46,12 +46,12 @@ export default () =>
                      selectedTimeout = item.timeout;
                      updateMenuStyle();
                      Utils.execAsync(`/home/berz/.config/hypr/scripts/toggle_lockscreen_timeout.sh set ${item.timeout}`);
-                     btn._id = Notifications.instance.Notify(
+                     btn._id = Notifications.Notify(
                         'Lock Time',
                         btn._id || null,
                         'com.github.bilelmoussaoui.Authenticator-symbolic',
                         item.name,
-                        '',
+                        'Lock Time',
                         [],
                         {},
                      );

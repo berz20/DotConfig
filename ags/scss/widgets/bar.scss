@@ -144,6 +144,8 @@ $float: $spacing * 0.7;
    .tomato {
       label { color: $magenta; }
       font-size: $font-size;
+      &:hover label { color: $magenta; }
+      &:active label, &.active label { color: $accent_fg; }
    }
 
    .rclonedrive {
