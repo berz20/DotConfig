@@ -103,4 +103,5 @@
 /xsettingsd/*
 /yarn/*
 /zsh/src/plugins/*
-/nvim/lazy-lock.json/*
+/nvim/*.json
+/nvim/LICENSE
