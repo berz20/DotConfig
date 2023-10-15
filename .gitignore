@@ -102,4 +102,6 @@
 /xmonad/*
 /xsettingsd/*
 /yarn/*
-/zsh/src/plugins/*
+/zsh/src/
+/zsh/.zcompdump
+/zsh/zsh_history
