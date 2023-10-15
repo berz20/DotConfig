@@ -103,5 +103,3 @@
 /xsettingsd/*
 /yarn/*
 /zsh/src/plugins/*
-/nvim/*.json
-/nvim/LICENSE
