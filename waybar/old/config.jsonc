@@ -1,0 +1,350 @@
+{
+   "layer": "normal",
+   "position": "top",
+   "mod": "dock",
+   "exclusive": true,
+   "passthrough": false,
+   "gtk-layer-shell": true,
+   "height": 0,
+   "modules-left": [
+      "clock",
+      // "cpu",
+      // "temperature",
+      // "custom/expand",
+      "custom/memory",
+      "custom/cpu",
+      "custom/temperature",
+      // "custom/media",
+      "wlr/workspaces"
+      // "wlr/taskbar"
+   ],
+   "modules-center": [
+      "custom/media"
+   ],
+   "modules-right": [
+      "tray",
+      "custom/tomato",
+      "custom/screenlock-timeout",
+      // "idle_inhibitor",
+      // "custom/language",
+      "backlight",
+      "pulseaudio",
+      "pulseaudio#microphone",
+      "bluetooth",
+      "network",
+      "battery"
+      // "custom/launcher"
+   ],
+   "hyprland/window": {
+      "format": "{}"
+   },
+   "wlr/workspaces": {
+      "disable-scroll": true,
+      "all-outputs": true,
+      "on-click": "activate",
+      "on-click-right": "~/.config/hypr/scripts/changeLayout",
+      "format": "{icon}",
+      "format-icons": {
+         // "1": "",
+         // "2": "",
+         // "3": "",
+         // "4": "",
+         // "5": "",
+         // "6": "",
+         // "7": "",
+         // "8": "",
+         // "9": "",
+         // "10": "",
+         // "default": ""
+      }
+   },
+   "wlr/taskbar": {
+      "format": "{icon}",
+      // "icon-size": 14,
+      // "icon-theme": "Numix-Circle",
+      "tooltip-format": "{title}",
+      "on-click": "activate",
+      "on-click-middle": "close",
+      "ignore-list": [
+         "Alacritty",
+         "Figure 1",
+         "Figure 2",
+         "Figure 3",
+         "Figure 4",
+         "Figure 5",
+         "Figure 6",
+         "Figure 7",
+         "wofi",
+         "org.wezfurlong.wezterm",
+         "foot"
+      ],
+      "app_ids-mapping": {
+         "firefoxdeveloperedition": "firefox-developer-edition"
+      }
+   },
+   "network": {
+      "tooltip-format": "{ifname} via {gwaddr} ",
+      "tooltip-format-wifi": "{essid} ({bandwidthUpBytes}-{bandwidthDownBytes})",
+      "tooltip-format-ethernet": "{ifname} ",
+      "tooltip-format-disconnected": "Disconnected",
+      "format": "{icon}",
+      "format-disabled": "{icon}",
+      "format-alt": "{icon} {essid}",
+      "format-alt-click": "click-right",
+      "format-icons": {
+         "wifi": [
+            "󰤫",
+            "󰤟",
+            "󰤢",
+            "󰤥",
+            "󰤨"
+         ],
+         "ethernet": [
+            ""
+         ],
+         "disabled": [
+            "󰤮"
+         ]
+      },
+      "on-click": "~/.config/hypr/wofi/network_menu"
+   },
+   "bluetooth": {
+      "format": " {status}",
+      "format-disabled": "",
+      "format-connected": " {device_alias}",
+      "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+      // "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
+      "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+      "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+      "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+      "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+      "on-click": "hyprctl dispatch workspace 8 && blueman-manager"
+   },
+   "custom/updates": {
+      "exec": "(pacman -Qu ; yay -Qua) | wc -l",
+      "interval": 7200,
+      "format": " {}"
+   },
+   "custom/weather": {
+      "tooltip": true,
+      "format": "{}",
+      "interval": 30,
+      "exec": "~/.config/waybar/scripts/waybar-wttr.py",
+      "return-type": "json"
+   },
+   "temperature": {
+      "interval": 5,
+      "tooltip": false,
+      "format": " {temperatureC}°C",
+      "max-length": 10,
+      "thermal-zone": 1,
+      "input-filename": "temp1_input",
+      "hwon-path": "sys/devices/platform/coretemp.0/hwon/hwon5/temp1_input",
+      "on-click": "~/.config/waybar/scripts/toggle_modules.sh"
+   },
+   "custom/temperature": {
+      "tooltip": false,
+      // "interval": 5,
+      "format": " {}",
+      "exec": "~/.config/waybar/scripts/tools/expand temperature-icon",
+      "max-length": 10
+   },
+   "cpu": {
+      "interval": 2,
+      "format": " {usage}%",
+      "max-length": 10
+   },
+   "custom/cpu": {
+      "tooltip": false,
+      // "interval": 5,
+      "format": " {}",
+      "exec": "~/.config/waybar/scripts/tools/expand cpu-icon",
+      "max-length": 10
+   },
+   "custom/memory": {
+      "tooltip": false,
+      "interval": 5,
+      "format": " {}",
+      "exec": "free -h | awk '/^Mem/ { print $3 }' | sed s/i//g",
+      "on-click": "~/.config/hypr/wofi/kill",
+      "on-click-right": "~/.config/waybar/scripts/expand_toolbar",
+      "max-length": 10
+   },
+   // "custom/memory": {
+   //    "tooltip": false,
+   //    // "interval": 5,
+   //    "format": " {}",
+   //    "exec": "~/.config/waybar/scripts/tools/expand memory-icon",
+   //    "on-click": "~/.config/hypr/wofi/kill",
+   //    "max-length": 10
+   // },
+   "custom/media": {
+      "format": "{}",
+      "format-stopped": " {}",
+      "escape": true,
+      "return-type": "json",
+      "max-length": 60,
+      // "interval": 5,
+      "format-icons": {
+         "spotify": " ",
+         "default": " ",
+         "stopped": " "
+      },
+      // "on-click": "playerctl play-pause",
+      "on-click": "~/.config/hypr/ui/eww/scripts/launch_dashboard dashboard_music",
+      "on-click-right": "hyprctl dispatch workspace 7",
+      "smooth-scrolling-threshold": 10, // This value was tested using a trackpad, it should be lowered if using a mouse.
+      "on-scroll-up": "playerctl next",
+      "on-scroll-down": "playerctl previous",
+      "exec": "if ! pgrep -x wofi > /dev/null && ! hyprctl clients | grep -q 'wofi'; then $HOME/.config/waybar/scripts/mediaplayer.py 2> /dev/null; else echo 'null'; fi"
+   },
+   "custom/media1": {
+      "interval": 5,
+      "format": "{icon} {}",
+      // "return-type": "json",
+      "max-length": 100,
+      "format-icons": {
+         "spotify": " ",
+         "default": " "
+      },
+      "escape": true,
+      "exec": "~/.config/polybar/scripts/spotify1.sh 2> /dev/null",
+      "on-click": "playerctl -p spotify play-pause",
+      "on-click-right": "killall spotify",
+      "smooth-scrolling-threshold": 10, // This value was tested using a trackpad, it should be lowered if using a mouse.
+      "on-scroll-up": "playerctl -p spotify next",
+      "on-scroll-down": "playerctl -p spotify previous"
+   },
+   "custom/tomato": {
+      "tooltip": false,
+      "interval": 5,
+      "format": "{}",
+      // "return-type": "json",
+      "max-length": 100,
+      "escape": true,
+      "exec": "~/.config/polybar/scripts/tomato.sh",
+      "on-click": "i3-gnome-pomodoro start-stop",
+      "on-click-right": "i3-gnome-pomodoro toggle"
+   },
+   "idle_inhibitor": {
+      "format": "{icon}",
+      "format-icons": {
+         "activated": " ",
+         "deactivated": " "
+      },
+      "on-scroll-down": "hyprctl dispatch workspace +1",
+      "on-scroll-up": "hyprctl dispatch workspace -1"
+   },
+   "custom/launcher": {
+      "format": "",
+      "tooltip": false,
+      "on-click": "bash ~/.config/hypr/wofi/launcher",
+      "on-click-right": "killall rofi"
+   },
+   "custom/power": {
+      "tooltip": false,
+      "format": "襤",
+      "on-click": "bash ~/.config/dwm/rofi/bin/powermenu"
+      /* "on-click":"rofi-powermenu" */
+      /*"on-click": "wlogout -p layer-shell"*/
+   },
+   "tray": {
+      "icon-size": 13,
+      "spacing": 10
+   },
+   "clock": {
+      "format": "{: %R -  %d/%m}",
+      "format-alt": "{: %R -  %A %d %B}",
+      // "tooltip-format": "<big>{:%Y %B}</big>\n<tt><big>{calendar}</big></tt>",
+      // "on-click-right": "~/.config/hypr/ui/eww/scripts/launch_dashboard dashboard_calendar"
+      "on-click-right": "eww open --toggle calendar"
+   },
+   "backlight": {
+      "device": "intel_backlight",
+      "format": "{icon} {percent}%",
+      "format-icons": [
+         "",
+         "",
+         ""
+      ],
+      "on-scroll-up": "brightnessctl set 1%-",
+      "on-scroll-down": "brightnessctl set 1%+",
+      "on-click": "bash ~/.config/hypr/scripts/brightness --warm",
+      "min-length": 6
+   },
+   "battery": {
+      "interval": 5,
+      "tooltip": false,
+      "states": {
+         "good": 85,
+         "warning": 35,
+         "critical": 20
+      },
+      "format": "{icon} {capacity}%",
+      "format-charging": " {capacity}% ({power:.1f}W)",
+      "format-plugged": " {capacity}%",
+      "format-alt": "{icon} {time} ({power:.1f}W)",
+      // "on-click-right": "~/.config/hypr/ui/eww/scripts/launch_dashboard dashboard_system",
+      "on-click-right": "eww open --toggle quicksettings",
+      "format-icons": [
+         "",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "",
+         ""
+      ]
+   },
+   "pulseaudio": {
+      "format": "{icon} {volume}%",
+      "tooltip": false,
+      "format-muted": "󰝟",
+      "format-bluetooth": " {volume}%",
+      "on-click": "pamixer -t",
+      "on-click-right": "hyprctl dispatch workspace 8 && pulseaudio-equalizer-gtk",
+      "on-scroll-up": "pamixer -d 5",
+      "on-scroll-down": "pamixer -i 5",
+      "scroll-step": 5,
+      "format-icons": {
+         "headphone": "",
+         "hands-free": "",
+         "headset": "",
+         "phone": "",
+         "portable": "",
+         "car": "",
+         "default": [
+            "",
+            "",
+            ""
+         ]
+      }
+   },
+   "pulseaudio#microphone": {
+      "format": "{format_source}",
+      "format-source": " {volume}%",
+      "format-source-muted": "",
+      "on-click": "pamixer --default-source -t",
+      "on-click-right": "hyprctl dispatch workspace 8 && pavucontrol",
+      "on-scroll-up": "pamixer --default-source -d 5",
+      "on-scroll-down": "pamixer --default-source -i 5",
+      "scroll-step": 5
+   },
+   "custom/screenlock-timeout": {
+      "return-type": "json",
+      "exec": "$HOME/.config/hypr/scripts/toggle_lockscreen_timeout.sh",
+      "interval": 900,
+      "tooltip": false,
+      "signal": 9,
+      "on-click": "$HOME/.config/hypr/scripts/toggle_lockscreen_timeout.sh toggle"
+   },
+   "custom/expand": {
+      "on-click": "~/.config/waybar/scripts/expand_toolbar",
+      "format": "{}",
+      "exec": "~/.config/waybar/scripts/tools/expand arrow-icon"
+   }
+}

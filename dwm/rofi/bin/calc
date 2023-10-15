@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+DIR="/home/berz/.config/dwm"
+
+rofi -show calc -modi calc -no-show-match -no-sort -theme $DIR/rofi/themes/calc.rasi

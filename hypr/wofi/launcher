@@ -1,0 +1,1 @@
+wofi -W 400 -H 25% -i -a -I --show drun --prompt Apps -c ~/.config/wofi/style.css

@@ -1,0 +1,81 @@
+#!/usr/bin/env bash
+
+## Copyright (C) 2020-2022 Aditya Shakya <adi1090x@gmail.com>
+## Everyone is permitted to copy and distribute copies of this file under GNU-GPL3
+
+DIR="/home/berz/.config/hypr"
+
+uptime_pretty=$(uptime -p | sed -e 's/up //g')
+uptime=$(uptime | sed -e 's/, //g' | awk '{printf "%s %s %s", "Uptime ", $3, $4}')
+
+# Options
+shutdown=" Shutdown"
+reboot=" Reboot"
+lock=" Lock"
+suspend=" Suspend"
+logout=" Logout"
+
+yes="Yes"
+no="No"
+# Get user confirmation
+get_confirmation() {
+	echo -e "$yes\n$no" | wofi --dmenu -W 150 -H 10% 3 -i -a -I \
+		-p "Are You Sure?"
+}
+
+# Show message
+show_msg() {
+	notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "" "Options  -  yes / y / no / n"
+}
+
+# Variable passed to rofi
+options="$shutdown\n$reboot\n$lock\n$suspend\n$logout"
+
+chosen="$(echo -e "$options" | wofi -W 150 -H 21% -i -a -I -p "$uptime_pretty Up" --dmenu)"
+case $chosen in
+$shutdown)
+	ans=$(get_confirmation &)
+	if [[ $ans == "yes" ]] || [[ $ans == "YES" ]] || [[ $ans == "y" ]] || [[ $ans == "Yes" ]]; then
+		systemctl poweroff
+	elif [[ $ans == "no" ]] || [[ $ans == "NO" ]] || [[ $ans == "n" ]] || [[ $ans == "No" ]]; then
+		exit
+	else
+		exit
+	fi
+	;;
+$reboot)
+	ans=$(get_confirmation &)
+	if [[ $ans == "yes" ]] || [[ $ans == "YES" ]] || [[ $ans == "y" ]] || [[ $ans == "Yes" ]]; then
+		systemctl reboot
+	elif [[ $ans == "no" ]] || [[ $ans == "NO" ]] || [[ $ans == "n" ]] || [[ $ans == "No" ]]; then
+		exit
+	else
+		show_msg
+	fi
+	;;
+$lock)
+	swaylock
+	;;
+$suspend)
+	ans=$(get_confirmation &)
+	if [[ $ans == "yes" ]] || [[ $ans == "YES" ]] || [[ $ans == "y" ]] || [[ $ans == "Yes" ]]; then
+		mpc -q pause
+		amixer set Master mute
+		systemctl suspend
+	elif [[ $ans == "no" ]] || [[ $ans == "NO" ]] || [[ $ans == "n" ]] || [[ $ans == "No" ]]; then
+		exit
+	else
+		show_msg
+	fi
+	;;
+$logout)
+	ans=$(get_confirmation &)
+	if [[ $ans == "yes" ]] || [[ $ans == "YES" ]] || [[ $ans == "y" ]] || [[ $ans == "Yes" ]]; then
+		kill -9 -1
+	elif [[ $ans == "no" ]] || [[ $ans == "NO" ]] || [[ $ans == "n" ]] || [[ $ans == "No" ]]; then
+		exit
+	else
+		show_msg
+	fi
+	;;
+esac

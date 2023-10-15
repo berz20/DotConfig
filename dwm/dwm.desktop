@@ -1,0 +1,8 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=DWM
+Comment=Dynamic window manager
+Exec=/home/berz/.config/dwm/bin/autostart.sh
+Icon=dwm
+Type=XSession
+

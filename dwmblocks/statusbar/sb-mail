@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# Exit if no internet.
+wget --spider -q http://example.com || exit 1
+
+# Display the count, if non-zero.
+count1="$(qgmail request users.labels.get me INBOX | jq .messagesUnread)"
+count2="$(qgmail --token ~/.cache/qgmail/college_token.json request users.labels.get me INBOX | jq .messagesUnread)"
+
+[ $? -gt 0 ] && exit
+
+output=""
+if [ "$count1" != "null" ]; then
+    output=" $count1"
+    [ "$count2" != "null" ] && output="$output  $count2"
+else
+    [ "$count2" != "null" ] && output=" $count2"
+fi
+
+[ -z "$output" ] && exit
+. /home/berz/.config/dwmblocks-async/statusbar/sb-theme
+display "$output"

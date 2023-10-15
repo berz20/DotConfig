@@ -1,0 +1,96 @@
+#!/usr/bin/bash
+TEMP=/tmp/current_wall
+
+files=(~/.config/hypr/wallpapers/*)
+
+waybar=~/.config/waybar
+scripts=$waybar/scripts
+
+cooldown=0.1
+
+# #!/usr/bin/bash
+# source /home/berz/.config/dwmblocks/scripts/theme
+# ## Cpu Info
+# cpu_info() {
+#   case $BLOCK_BUTTON in
+#     # 1) 1 dito 2) 3 dita 3) 2 dita
+#  	  1) st -e gotop;;
+#
+#   esac
+# 	read -r cpu a b c previdle rest < /proc/stat
+# 	prevtotal=$((a+b+c+previdle))
+# 	sleep 0.5
+# 	read -r cpu a b c idle rest < /proc/stat
+# 	total=$((a+b+c+idle))
+# 	cpu=$((100*( (total-prevtotal) - (idle-previdle) ) / (total-prevtotal) ))
+#   temp= $(sensors | awk '/Core 0/ {print $3}')
+# 	printf " ^c$GREEN^^b$BLACK^^c$GRAY2^^b$GREEN^^c$GREEN^^b$GRAY2^"
+# 	printf "^c$WHITE^^b$GRAY2^ $cpu%% | $(sensors | awk '/Core 0/ {print +$3"°"}')^c$GRAY2^^b$BLACK^"
+#
+# }
+# cpu_info
+
+while true; do
+	case "$1" in
+	"cycle")
+		index=$(cat $TEMP)
+		index=$((index + 1))
+		if [ $index -ge ${#files[@]} ]; then
+			index=0
+		fi
+		echo $index >$TEMP
+		$scripts/wall "${files[$index]}"
+		exit 0
+		;;
+	"arrow-icon")
+		if $scripts/toolbar_state; then
+			echo ""
+		else
+			echo ""
+		fi
+		;;
+	"memory-icon")
+		if $scripts/toolbar_state; then
+			free -h | awk '/^Mem/ { print $3 }' | sed s/i//g
+		else
+			echo ""
+		fi
+		;;
+	"cpu-icon")
+		if $scripts/toolbar_state; then
+			read -r cpu a b c previdle rest </proc/stat
+			prevtotal=$((a + b + c + previdle))
+			sleep 0.5
+			read -r cpu a b c idle rest </proc/stat
+			total=$((a + b + c + idle))
+			echo "$((100 * ((total - prevtotal) - (idle - previdle)) / (total - prevtotal)))%"
+		else
+			echo ""
+		fi
+		;;
+	"temperature-icon")
+		if $scripts/toolbar_state; then
+			sensors | awk '/Core 0/ {print $3}'
+		else
+			echo ""
+		fi
+		;;
+	"ss-icon")
+		if $scripts/toolbar_state; then
+			echo ""
+		else
+			echo ""
+		fi
+		;;
+	# "media")
+
+	*)
+		if $scripts/toolbar_state; then
+			echo "     "
+		else
+			echo ""
+		fi
+		;;
+	esac
+	sleep $cooldown
+done

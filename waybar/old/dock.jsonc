@@ -1,0 +1,17 @@
+{
+   "name": "toggle",
+   "mode": "dock",
+   "position": "left",
+   "modules-center": [
+      "wlr/taskbar"
+   ],
+   "wlr/taskbar": {
+      "format": "{icon}",
+      "icon-size": 32,
+      "all-outputs": "false",
+      "tooltip-format": "{}",
+      "on-click": "activate",
+      "on-click-middle": "close",
+      "on-click-right": "maximize"
+   }
+}

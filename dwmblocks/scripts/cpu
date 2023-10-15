@@ -1,0 +1,21 @@
+#!/usr/bin/bash
+source /home/berz/.config/dwmblocks/scripts/theme   
+## Cpu Info
+cpu_info() {
+  case $BLOCK_BUTTON in
+    # 1) 1 dito 2) 3 dita 3) 2 dita
+ 	  1) st -e gotop;;
+
+  esac
+	read -r cpu a b c previdle rest < /proc/stat
+	prevtotal=$((a+b+c+previdle))
+	sleep 0.5
+	read -r cpu a b c idle rest < /proc/stat
+	total=$((a+b+c+idle))
+	cpu=$((100*( (total-prevtotal) - (idle-previdle) ) / (total-prevtotal) ))
+  temp= $(sensors | awk '/Core 0/ {print $3}')
+	printf " ^c$GREEN^^b$BLACK^^c$GRAY2^^b$GREEN^^c$GREEN^^b$GRAY2^"
+	printf "^c$WHITE^^b$GRAY2^ $cpu%% | $(sensors | awk '/Core 0/ {print +$3"°"}')^c$GRAY2^^b$BLACK^" 
+
+}
+cpu_info

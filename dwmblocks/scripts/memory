@@ -1,0 +1,15 @@
+#!/usr/bin/bash
+
+source /home/berz/.config/dwmblocks/scripts/theme   
+## Memory
+memory() {
+  case $BLOCK_BUTTON in
+    # 1) 1 dito 2) 3 dita 3) 2 dita
+    1) /home/berz/.config/dwm/rofi/bin/kill;;
+ 	  2) baobab;;
+    3) notify-send "$(df -h | grep /dev/nvme0n1p2)";;
+  esac
+	printf "^c$PINK^^b$BLACK^  $(free -h | awk '/^Mem/ { print $3 }' | sed s/i//g) ^d^%s"
+  
+}
+memory

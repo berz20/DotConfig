@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+
+## Temperature
+temp() {
+  
+	printf "^c#C678DD^^b#1e222a^  🌡 $(sensors | awk '/Core 0/ {print $3}') ^d^%s"
+}
+temp
+

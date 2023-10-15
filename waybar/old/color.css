@@ -1,0 +1,34 @@
+/*
+*
+* Gruvchad palette
+*
+*/
+
+@define-color base   #1f1e1d;
+@define-color mantle #282b2c;
+@define-color crust  #282b2c;
+
+@define-color text     #c7b89d;
+@define-color subtext0 #c1c1a8;
+@define-color subtext1 #c1c1a8;
+
+@define-color surface0 #282b2c;
+@define-color surface1 #282b2c;
+@define-color surface2 #5d6061;
+
+@define-color overlay0 #5d6061;
+@define-color overlay1 #5d6061;
+@define-color overlay2 #5d6061;
+
+@define-color blue     #6f8faf;
+@define-color li-blue  #89b4fa;
+@define-color green    #a9b665;
+@define-color red      #ea6962;
+@define-color orange   #E49263;
+@define-color yellow   #e1bb7e;
+@define-color pink     #d3869b;
+@define-color purple   #cba6f7;
+@define-color brown    #928374;
+@define-color cyan     #89b482;
+@define-color fd-green #98971a;
+@define-color fd-cyan  #689d6a;

@@ -1,0 +1,21 @@
+#!/usr/bin/bash
+
+source /home/berz/.config/dwmblocks/scripts/theme   
+## Time
+clock() {
+  case $BLOCK_BUTTON in
+    # 1) 1 dito 2) 3 dita 3) 2 dita
+ 	  1) /home/berz/.config/dwm/rofi/bin/powermenu &;;
+    2) /home/berz/.config/dwm/run/close.sh;;
+    3) gnome-pomodoro &;;
+
+  esac
+ 	dte=$(date '+%a, %D')
+	time=$(date +"%H:%M")
+
+	printf "^c$BLUE^^b$BLACK^^c$BLACK^^b$BLUE^^c$BLUE^^b$BLACK^^d^%s"
+	printf " ^c$BLUE^$dte "
+	printf "^c$BLUE^^b$BLACK^^c$BLACK^^b$BLUE^$time^c$BLUE^^b$BLACK^^d^%s"
+
+}
+clock

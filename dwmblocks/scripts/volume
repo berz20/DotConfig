@@ -1,0 +1,28 @@
+#!/usr/bin/bash
+
+source /home/berz/.config/dwmblocks/scripts/theme   
+## Volume
+
+  case $BLOCK_BUTTON in
+    # 1) 1 dito 2) 3 dita 3) 2 dita
+ 	  1) pamixer --toggle-mute;;
+ 	  2) pulseaudio-equalizer-gtk & ;;
+ 	  3) pavucontrol & ;;
+
+  esac
+
+	muted=$(pamixer --get-volume-human)
+	vol=$(pactl list sinks | grep Volume: | awk 'FNR == 1 { print $5 }' | cut -f1 -d '%')
+
+	if [ "$muted" = "muted" ]; then
+		echo "^c$RED^^b$BLACK^  muted"
+	else
+		if [ "$vol" -ge 45 ]; then
+			printf "^c$CYAN^^b$BLACK^  $vol%% "
+		elif [ "$vol" -ge 15 ]; then
+			printf "^c$CYAN^^b$BLACK^  $vol%% "
+		elif [ "$vol" -ge 0 ]; then
+		  printf "^c$CYAN^^b$BLACK^  $vol%% "
+		fi
+	fi
+

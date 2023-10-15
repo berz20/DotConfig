@@ -1,0 +1,41 @@
+#!/bin/sh
+
+display() {
+	local args=""
+    local color
+	case $1 in
+		-n) args="-n"; shift ;;
+	esac
+
+	if [ -n "${2+x}" ]; then
+		color=$2
+	else
+		case "$(basename $0)" in
+			sb-mail) color=13 ;;
+			sb-music) color=14 ;;
+			sb-disk) color=10 ;;
+			sb-memory) color=15 ;;
+			sb-loadavg) color=11 ;;
+			sb-mic) color=9 ;;
+			sb-record) color=9 ;;
+			sb-volume) color=15 ;;
+			sb-battery) color=14 ;;
+			sb-date) color=12 ;;
+			sb-network) color=9 ;;
+			*) color=15 ;;
+		esac
+	fi
+
+    case "$STATUSBAR" in
+        "i3blocks")
+            local body="$(echo $1 | colrm 45)"
+            echo $args "<span foreground='$(palette.sh $color)'>$body</span>"
+            ;;
+        "eww")
+            echo $args "$1"
+            ;;
+        "dwmblocks")
+            echo $args "^C$color^$1"
+            ;;
+    esac
+}

@@ -1,0 +1,84 @@
+#!/usr/bin/bash
+# Color
+source /home/berz/.config/dwmblocks/scripts/theme
+
+case $BLOCK_BUTTON in
+# 1) 1 dito 2) 3 dita 3) 2 dita
+# 1) /home/berz/.config/dwm/run/player.sh --toggle | notify-send -t 4000 "  $ARTIST - $TRACK";;
+# 1) /home/berz/.config/dwm/run/player.sh --toggle; eww -c ~/.config/eww/Main  open --toggle spotify;;
+1) playerctl play-pause -p spotify ;;
+2) /home/berz/.config/rofi/music/music & ;;
+3)
+	wmctrl -r Spotify -t 64
+	wmctrl -a Spotify
+	;;
+
+esac
+
+# The name of polybar bar which houses the main spotify module and the control modules.
+PARENT_BAR="now-playing"
+PARENT_BAR_PID=$(pgrep -a "polybar" | grep "$PARENT_BAR" | cut -d" " -f1)
+
+# Set the source audio player here.
+# Players supporting the MPRIS spec are supported.
+# Examples: spotify, vlc, chrome, mpv and others.
+# Use `playerctld` to always detect the latest player.
+# See more here: https://github.com/altdesktop/playerctl/#selecting-players-to-control
+PLAYER="spotify"
+
+# Format of the information displayed
+# Eg. {{ artist }} - {{ album }} - {{ title }}
+# See more attributes here: https://github.com/altdesktop/playerctl/#printing-properties-and-metadata
+FORMAT="^c#3b414d^ ^b#7ec7a2^ ^c#abb2bf^ ^b#353b45^[{{ title }} - {{ artist }}]"
+
+ARTIST=$(playerctl -p spotify metadata artist)
+TRACK=$(playerctl -p spotify metadata title)
+ALL="${ARTIST:0:11} - ${TRACK:0:18}"
+
+update_hooks() {
+	while IFS= read -r id; do
+		polybar-msg -p "$id" hook spotify-play-pause $2 1>/dev/null 2>&1
+	done < <(echo "$1")
+}
+
+PLAYERCTL_STATUS=$(playerctl --player=$PLAYER status 2>/dev/null)
+EXIT_CODE=$?
+
+if [ $EXIT_CODE -eq 0 ]; then
+	STATUS=$PLAYERCTL_STATUS
+fi
+
+if [ "$1" == "--status" ]; then
+	echo "$STATUS"
+fi
+
+if [ "$STATUS" = "Paused" ]; then
+	update_hooks "$PARENT_BAR_PID" 2
+	printf "^c$RED^^b$BLACK^^c$GRAY2^^b$RED^^c$RED^^b$GRAY2^"
+	printf "^c$WHITE^^b$GRAY2^ $ALL^c$GRAY2^^b$BLACK^"
+elif [ "$STATUS" = "" ]; then
+	echo "$STATUS"
+else
+	update_hooks "$PARENT_BAR_PID" 1
+	printf "^c$GREEN^^b$BLACK^^c$GRAY2^^b$GREEN^^c$GREEN^^b$GRAY2^"
+	printf "^c$WHITE^^b$GRAY2^ $ALL^c$GRAY2^^b$BLACK^"
+
+fi
+
+## Spotify
+# spotify () {
+#   if (ps -C spotify) > /dev/null;
+#   then
+#      ARTIST=$(playerctl -p spotify metadata artist)
+#      TRACK=$(playerctl -p spotify metadata title)
+#      DURATION=$(playerctl -p spotify metadata mpris:length | sed 's/.\{6\}$//')
+#      STATUS=$(playerctl -p spotify status)
+#      ALL="${ARTIST:0:11} - ${TRACK:0:18}"
+# 	   printf "^c#3b414d^ ^b#7ec7a2^ "
+# 	   printf "^c#abb2bf^ ^b#353b45^ $ALL"
+#   else
+#     printf ""
+#   fi
+#
+# }
+# spotify

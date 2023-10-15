@@ -1,0 +1,36 @@
+#!/usr/bin/bash
+
+source /home/berz/.config/dwmblocks/scripts/theme   
+## Battery Info
+battery() {
+
+  case $BLOCK_BUTTON in
+    # 1) 1 dito 2) 3 dita 3) 2 dita
+    1) notify-send -t 4000 "$(acpi --battery)";; 
+    2) xfce4-power-manager-settings;;
+    3) xfce4-power-manager-settings;;
+  esac 
+	BAT=$(upower -i `upower -e | grep 'BAT'` | grep 'percentage' | cut -d':' -f2 | tr -d '%,[:blank:]')
+	AC=$(upower -i `upower -e | grep 'BAT'` | grep 'state' | cut -d':' -f2 | tr -d '[:blank:]')
+
+	if [[ "$AC" == "charging" ]]; then
+		printf "^c$ORANGE^^b$BLACK^  $BAT%%^d^%s^b$BLACK^"  
+	elif [[ "$AC" == "fully-charged" ]]; then
+		printf "^c$GREEN^^b$BLACK^  Full^d^%s^b$BLACK^"  
+	else
+		if [[ ("$BAT" -ge "0") && ("$BAT" -le "20") ]]; then
+			printf "^c$ORANGE^^b$BLACK^  $BAT%%^d^%s^b$BLACK^"  
+		elif [[ ("$BAT" -ge "20") && ("$BAT" -le "40") ]]; then
+			printf "^c$ORANGE^^b$BLACK^  $BAT%%^d^%s^b$BLACK^"  
+		elif [[ ("$BAT" -ge "40") && ("$BAT" -le "60") ]]; then
+			printf "^c$ORANGE^^b$BLACK^  $BAT%%^d^%s^b$BLACK^"  
+		elif [[ ("$BAT" -ge "60") && ("$BAT" -le "80") ]]; then
+			printf "^c$ORANGE^^b$BLACK^  $BAT%%^d^%s^b$BLACK^"  
+		elif [[ ("$BAT" -ge "80") && ("$BAT" -le "100") ]]; then
+			printf "^c$ORANGE^^b$BLACK^  $BAT%%^d^%s^b$BLACK^"  
+		fi
+	fi
+
+}
+battery
+

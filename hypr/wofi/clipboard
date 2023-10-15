@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+DIR="/home/berz/.config/hypr"
+
+# Show message
+show_msg() {
+	notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "" "Options  -  yes / y / no / n"
+}
+main() {
+	list="$(wl-clipboard-history -l 100 | cut -d ',' -f2 | sed -e 's/^[[:space:]]*//')"
+
+	chosen=$(echo -e "$list" | wofi -W 500 -i -a -I -p "Clipboard history" --dmenu)
+	# when select one of the 'selected' options listed in dmenu.
+	if [[ -n $chosen ]]; then
+		wl-copy "$chosen" && notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "" "Copied : " "'$chosen'"
+	else
+		exit
+	fi
+
+}
+
+[[ "${BASH_SOURCE[0]}" == "${0}" ]] && main "$@"

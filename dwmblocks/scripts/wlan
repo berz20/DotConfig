@@ -1,0 +1,19 @@
+#!/usr/bin/bash
+
+source /home/berz/.config/dwmblocks/scripts/theme
+## Wi-fi
+wlan() {
+	case $BLOCK_BUTTON in
+	# 1) 1 dito 2) 3 dita 3) 2 dita
+	1) /home/berz/.config/dwm/rofi/bin/network_menu & ;;
+	2) blueman-manager & ;;
+	3) nm-connection-editor & ;;
+
+	esac
+	NAME=$(iwgetid -r)
+	case "$(cat /sys/class/net/w*/operstate 2>/dev/null)" in
+	up) printf "^c$BLUE^^b$BLACK^^c$BLACK^^b$BLUE^^c$BLUE^^b$BLACK^^d^%s" " ^c$BLUE^${NAME:0:12}" ;;
+	down) printf "^c$RED^^b$BLACK^^c$BLACK^^b$RED^睊^c$RED^^b$BLACK^^d^%s" " ^c$RED^Disconnected" ;;
+	esac
+}
+wlan

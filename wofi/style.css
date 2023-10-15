@@ -1,0 +1,85 @@
+#window {
+    margin: 0px;
+    color: #c7b89d;
+    background-color: #1f1e1d;
+    border-radius: 10px;
+    /* font-family: JuliaMono SemiBold, JetBrainsMono Nerd Font; */
+    /* font-weight: 600; */
+    /* font-size: 14px; */
+    /* min-height: 0; */
+}
+
+#input {
+    margin: 10px;
+    color: #c7b89d;
+    border: 2px solid;
+    border-radius: 10px;
+    border-color: #484544;
+}
+
+/* #input:focus { */
+/* } */
+
+/* #input:focus image { */
+/* } */
+
+/* #input image { */
+/* } */
+
+#inner-box {
+    margin: 0px;
+    border: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 10px;
+    background-color: inherit;
+}
+
+#outer-box {
+    margin: 0px;
+    border: 2px solid;
+    border-color: #484544;
+    background-color: inherit;
+    border-radius: 10px;
+}
+
+#scroll {
+    margin: 0px;
+    border: none;
+}
+
+#text {
+    margin: 5px;
+    color: #c7b89d;
+    border: none;
+}
+
+#text:selected {
+    margin: 5px;
+    color: #c7b89d;
+    border: none;
+}
+
+#entry {
+    color: #c7b89d;
+    /* border: 2px solid; */
+    border-radius: 10px;
+    /* border-color: #a9b665; */
+    background-color: inherit;
+}
+
+#entry:selected {
+    color: #c7b89d;
+    /* border: 2px solid; */
+    border-radius: 10px;
+    /* border-color: #a9b665; */
+    background-color: inherit;
+}
+
+#text:selected {
+    color: #a9b665;
+    background-color: inherit;
+    border-color: #a9b665;
+    font-weight: bold;
+}
+

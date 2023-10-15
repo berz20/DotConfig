@@ -1,0 +1,6 @@
+#!/bin/sh
+
+if [ -f /tmp/record ]; then
+	. /home/berz/.config/dwmblocks-async/statusbar/sb-theme
+	display ""
+fi
