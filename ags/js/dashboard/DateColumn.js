@@ -7,8 +7,6 @@ import Theme from '../services/theme/theme.js';
 const SysProgress = (type, title, unit, max) => Widget.Box({
     className: `circular-progress-box ${type}`,
     hexpand: true,
-    // binds: [['tooltipText', vars[type], 'value', v =>
-    //     `${title}: ${Math.floor(v * 100)}${unit}`]],
     connections: [[vars[type], box => {
         box.tooltipText = max === 0
             ? `${title}: ${Math.floor(vars[type].value * 100)}${unit}`

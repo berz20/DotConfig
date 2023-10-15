@@ -28,6 +28,7 @@ $float: $spacing * 0.7;
             label, image { color: $accent_fg; }
             background-image: $active_gradient;
             background-color: $accent;
+            color: $accent_fg;
         }
     } @else {
         @include accs_button($flat, $reactive);
