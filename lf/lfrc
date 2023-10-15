@@ -27,7 +27,7 @@ cmd mkdir ${{
 cmd mkfile ${{
   printf "File Name: "
   read ans
-  $EDITOR $ans
+  touch $ans
 }}
 
 cmd chmod ${{
@@ -58,22 +58,6 @@ cmd fzf_jump ${{
     cmd="cd"
   fi
   lf -remote "send $id $cmd \"$res\""
-}}
-
-cmd broot_jump ${{
-  f=$(mktemp)
-  res="$(broot --outcmd $f && cat $f | sed 's/cd //')"
-  rm -f "$f"
-  if [ -f "$res" ]; then
-    cmd="select"
-  elif [ -d "$res" ]; then
-    cmd="cd"
-  fi
-  lf -remote "send $id $cmd \"$res\""
-}}
-
-cmd open_config  ${{
-  $EDITOR $(bookmenu -b ~/.config/bookmenu/configs -f fzf -o)
 }}
 
 # Archive bindings
@@ -133,15 +117,14 @@ cmd toggle_preview %{{
 # Bindings
 # Remove some defaults
 map m
-map o
-map n
-map "'"
-map '"'
 map d
-map c
-map e
-map f
-map t
+# map o
+# map "'"
+# map '"'
+# map c
+# map e
+# map f
+# map t
 map "$"
 map ":"
 
@@ -165,13 +148,11 @@ map dd trash
 map tc clear_trash
 map tr restore_trash
 
-# Broot Mapping
-map f broot_jump
-
 map sr sortreverse
 map ds calcdirsize
 
 map zp toggle_preview
+
 # Basic Functions
 map . set hidden!
 map DD delete
@@ -179,15 +160,17 @@ map p paste
 map x cut
 map y copy
 map <enter> open
+
 # map mf mkfile
 map mf push %touch<space>
 map mr sudomkfile
+
 # map md mkdir
 map md push %mkdir<space>
 map ms $mkscript
 map ch chmod
 map cc clear
-map bg setwallpaper
+# map bg setwallpaper
 map o open_config
 map br $vimv $fx
 map r rename
@@ -198,15 +181,11 @@ map C clear
 map U unselect
 
 # Movement
-map gtr cd ~/.local/share/Trash/files
-map gus cd /run/media/
-
-map gs cd ~/Pictures/Screenshots/
-
-map gl cd ~/Documents/UNI/LAE
-map gu cd ~/Documents/Gdrive/Magistrale/Anno\ 1/Semestre\ 2/
-
+map gD cd ~/Downloads
+map gd cd ~/Documents
+map gp cd ~/Media/Pictures
 map gc cd ~/.config
-map ge cd ~/.config/hypr/
-
-map \;j cd ~
+map gu cd Documents/UNI/Gdrive/Magistrale/Anno\ 2/Semestre\ 1/
+map gU cd ~/Documents/UNI/Magistrale/
+map gt cd ~/.local/share/Trash/files
+map gs cd /run/media/
