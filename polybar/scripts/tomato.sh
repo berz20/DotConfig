@@ -1,0 +1,35 @@
+#!/usr/bin/bash
+
+source /home/berz/.config/dwmblocks/scripts/theme
+## Time
+tomato() {
+	# case $BLOCK_BUTTON in
+	#   # 1) 1 dito 2) 3 dita 3) 2 dita
+	#   1) i3-gnome-pomodoro start;;
+	#   2) i3-gnome-pomodoro stop;;
+	#   3) i3-gnome-pomodoro skip;;
+	#
+	# esac
+	# TOMATO=$(i3-gnome-pomodoro status)
+	# if [[ "$(echo $TOMATO | awk '{print $1;}')" = "Pomodoro" ]]; then
+	# 	printf "  "$(echo $TOMATO | awk '{print $2;}')""
+	# elif [[ "$(echo $TOMATO | awk '{print $1;}')" = "Long" ]]; then
+	# 	printf "  "$(echo $TOMATO | awk '{print $3;}')""
+	# elif [[ "$(echo $TOMATO | awk '{print $1;}')" = "Break" ]]; then
+	# 	printf "  "$(echo $TOMATO | awk '{print $2;}')""
+	# else
+	# 	printf " "
+	# fi
+	TOMATO=$(i3-gnome-pomodoro status)
+	if [[ "$(echo $TOMATO | awk '{print $1;}')" = "Pomodoro" ]]; then
+		printf " "$(echo $TOMATO | awk '{print $2;}')""
+	elif [[ "$(echo $TOMATO | awk '{print $1;}')" = "Long" ]]; then
+		printf " "$(echo $TOMATO | awk '{print $3;}')""
+	elif [[ "$(echo $TOMATO | awk '{print $1;}')" = "Break" ]]; then
+		printf " "$(echo $TOMATO | awk '{print $2;}')""
+	else
+		printf ""
+		# printf " "
+	fi
+}
+tomato

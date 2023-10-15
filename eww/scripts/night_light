@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+function state {
+	if pgrep -x "gammastep" >/dev/null; then
+		echo 'on'
+	else
+		echo 'off'
+	fi
+}
+
+function icon {
+	echo '󰖨'
+}
+
+function toggle {
+	STATE=$(state)
+	if [[ $STATE == 'on' ]]; then
+		eww update night_light_state="{ \"state\": \"off\", \"icon\": \"$(icon)\"}"
+		kill -9 $(pgrep -x "gammastep")
+	else
+		eww update night_light_state="{ \"state\": \"on\", \"icon\": \"$(icon)\"}"
+		gammastep -m wayland -PO 3200
+	fi
+}
+
+function get {
+	echo "{
+        \"state\": \"$(state)\",
+        \"icon\": \"$(icon)\"
+    }"
+}
+
+if [[ $1 == 'toggle' ]]; then toggle; fi
+if [[ $1 == 'get' ]]; then get; fi
