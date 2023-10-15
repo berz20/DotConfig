@@ -50,6 +50,6 @@ set recolor-darkcolor           "#ebdbb2" # fg
 
 set scroll-step 50
 
-set font "monospace normal 11"
+set font "Ubuntu Nerd Font 12"
 set synctex true
 set synctex-editor-command "nvr --remote-silent +%{line} %{input}"
