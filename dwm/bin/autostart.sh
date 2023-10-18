@@ -26,7 +26,7 @@ ksuperkey -e 'Super_L=Alt_L|F1' &
 ksuperkey -e 'Super_R=Alt_L|F1' &
 
 # Restore wallpaper
-hsetroot -cover /home/berz/Pictures/wallpapers/nord-qsave-2.png
+hsetroot -cover /home/berz/Media/Pictures/Wallpapers/Nord/nord-qsave-2.png
 # variety &
 
 # Lauch dwmbar

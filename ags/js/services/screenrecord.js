@@ -10,7 +10,7 @@ class Recorder extends Service {
         });
     }
 
-    _path = GLib.get_home_dir() + '/Videos/Screencasting';
+    _path = GLib.get_home_dir() + '/Media/Videos/Screencasting';
     _screenshotting = false;
     recording = false;
     timer = 0;
@@ -65,7 +65,7 @@ class Recorder extends Service {
     async screenshot(full = false) {
         try {
             const area = full ? null : await Utils.execAsync('slurp');
-            const path = GLib.get_home_dir() + '/Pictures/Screenshots';
+            const path = GLib.get_home_dir() + '/Media/Pictures/Screenshots';
             const file = `${path}/${now()}.png`;
             Utils.ensureDirectory(path);
 

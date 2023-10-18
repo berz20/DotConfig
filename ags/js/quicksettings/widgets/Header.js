@@ -4,7 +4,7 @@ import Theme from '../../services/theme/theme.js';
 import Lockscreen from '../../services/lockscreen.js';
 import Avatar from '../../misc/Avatar.js';
 import { uptime } from '../../variables.js';
-import { Battery, Widget, Notifications } from '../../imports.js';
+import { Battery, Widget, Notifications, Utils } from '../../imports.js';
 
 export const BatteryProgress = () => Widget.Box({
     className: 'battery-progress',

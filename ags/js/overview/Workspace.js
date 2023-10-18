@@ -9,6 +9,10 @@ const TARGET = [Gtk.TargetEntry.new('text/plain', Gtk.TargetFlags.SAME_APP, 0)];
 function substitute(str) {
     const subs = [
         { from: 'Caprine', to: 'facebook-messenger' },
+        { from: 'processing-app-Base', to: 'arduino' },
+        { from: 'Gimp-2.10', to: 'gimp' },
+        { from: 'Vivado', to: 'vivado_logo' },
+        { from: 'MATLAB R2022a - academic use', to: 'matlab' },
     ];
 
     for (const { from, to } of subs) {

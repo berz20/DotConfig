@@ -185,7 +185,7 @@ map gD cd ~/Downloads
 map gd cd ~/Documents
 map gp cd ~/Media/Pictures
 map gc cd ~/.config
-map gu cd Documents/UNI/Gdrive/Magistrale/Anno\ 2/Semestre\ 1/
+map gu cd ~/Documents/UNI/Gdrive/Magistrale/Anno\ 2/Semestre\ 1/
 map gU cd ~/Documents/UNI/Magistrale/
 map gt cd ~/.local/share/Trash/files
 map gs cd /run/media/
