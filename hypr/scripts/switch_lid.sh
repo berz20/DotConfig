@@ -7,6 +7,8 @@ else
 		hyprctl keyword monitor "eDP-1, disable"
 	else
 		swaylock -f
+		sleep 10
+		systemctl suspend
 
 	fi
 fi

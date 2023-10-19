@@ -9,5 +9,6 @@ export default () => PanelButton({
         btn.toggleClassName('active', win === 'overview' && visible);
     }]],
     onClicked: () => App.toggleWindow('overview'),
+    onHover: () => App.toggleWindow('overview'),
     content: FontIcon(distroIcon),
 });
