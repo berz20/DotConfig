@@ -4,10 +4,10 @@ set_timeout() {
 	LOCK_TIMEOUT=$1
 
 	swayidle -w \
-		timeout $LOCK_TIMEOUT 'swaylock' \
+		timeout $LOCK_TIMEOUT 'swaylock -f' \
 		timeout $((LOCK_TIMEOUT + 180)) 'hyprctl dispatch dpms off' \
-		resume 'hyprctl dispatch dpms on' \
-		before-sleep 'swaylock'
+		resume 'hyprctl dispatch dpms on'
+	# before-sleep 'swaylock'
 }
 
 toggle_lockscreen_timeout() {
@@ -59,6 +59,7 @@ toggle)
 	;;
 
 set)
+	killall swayidle
 	set_timeout $2
 	;;
 
