@@ -6,5 +6,5 @@ export default () => PanelButton({
     className: 'powermenu',
     content: Widget.Icon(icons.powermenu.shutdown),
     onClicked: () => App.openWindow('powermenu'),
-    onHover: () => App.openWindow('powermenu'),
+    // onHover: () => App.openWindow('powermenu'),
 });

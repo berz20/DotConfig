@@ -31,11 +31,11 @@ export const BluetoothToggle = () => ArrowToggleButton({
     connection: [Bluetooth, () => Bluetooth.enabled],
     deactivate: () => {
         Bluetooth.enabled = false
-        Utils.execAsync('bluetoothctl power off')
+        // Utils.execAsync('bluetoothctl power off')
     },
     activate: () => {
         Bluetooth.enabled = true
-        Utils.execAsync('bluetoothctl power on')
+        // Utils.execAsync('bluetoothctl power on')
     },
 });
 

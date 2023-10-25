@@ -21,11 +21,11 @@ HISTFILE=~/.config/zsh/zsh_history
 setopt appendhistory
 
 # Basic auto/tab complete:
-# autoload -U compinit
-# zstyle ':completion:*' menu select
-# zmodload zsh/complist
-# compinit
-# _comp_options+=(globdots)               # Include hidden files.
+autoload -U compinit
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+compinit
+_comp_options+=(globdots)               # Include hidden files.
 
 # Custom ZSH Binds
 bindkey '^ ' autosuggest-accept
@@ -52,5 +52,5 @@ fi
 # Load ; should be last.
 source $HOME/.config/zsh/src/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $HOME/.config/zsh/src/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-source $HOME/.config/zsh/src/plugins/zsh-completions/zsh-completions.plugin.zsh
+# source $HOME/.config/zsh/src/plugins/zsh-completions/zsh-completions.plugin.zsh
 # source $HOME/.config/zsh/src/plugins/zsh-tab-title/zsh-tab-title.plugin.zsh 2>/dev/null

@@ -7,7 +7,7 @@ no="No"
 
 # Get user confirmation
 get_confirmation() {
-	echo -e "$yes\n$no" | wofi --dmenu -W 150 -L 3 -i -a -I \
+	echo -e "$yes\n$no" | wofi --dmenu -W 150 -L 4 -i -a -I \
 		-p "Are You Sure?"
 }
 
