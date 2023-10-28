@@ -11,10 +11,10 @@ eww daemon
 #     # open main monitror stuff
 # fi
 
-# eww open bar
-# eww open dock
-# eww open desktop
+eww open bar
+eww open dock
+eww open desktop
 eww open notifications_popup
-# eww inspector
+eww inspector
 
 $HOME/.config/eww/scripts/myshell/./myshell --eww --file
