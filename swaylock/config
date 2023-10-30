@@ -11,7 +11,8 @@ datestr=%a, %e of %B
 
 # Add an image as a background 
 # In my setup the current wallpaper (requires wallpaper scripts in /scripts)
-image=/home/berz/Media/Pictures/Wallpapers/Nord/dn.png
+# image=/home/berz/Media/Pictures/Wallpapers/Nord/dn.png
+image=/home/berz/Media/Pictures/Wallpapers/Nord/nord-qsave-2.png
 
 # Fade in time
 fade-in=1

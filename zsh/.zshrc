@@ -14,6 +14,7 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 export EDITOR=nvim
 export VISUAL=nvim
 export OPENER='rifle'
+export QT_PLUGIN_PATH=/usr/lib/qt/plugins
 # History in cache directory:
 HISTSIZE=10000
 SAVEHIST=10000
@@ -54,3 +55,19 @@ source $HOME/.config/zsh/src/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $HOME/.config/zsh/src/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 # source $HOME/.config/zsh/src/plugins/zsh-completions/zsh-completions.plugin.zsh
 # source $HOME/.config/zsh/src/plugins/zsh-tab-title/zsh-tab-title.plugin.zsh 2>/dev/null
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/berz/Documents/Programs/ANACONDA/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/berz/Documents/Programs/ANACONDA/etc/profile.d/conda.sh" ]; then
+        . "/home/berz/Documents/Programs/ANACONDA/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/berz/Documents/Programs/ANACONDA/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
